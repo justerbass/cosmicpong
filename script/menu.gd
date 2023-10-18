@@ -10,11 +10,11 @@ func _restart_game():
 	$RestartTimer.start()
 
 func _on_arco_player_body_entered(body):
-	if body is Ball:
+	if body is pelota:
 		_restart_game()
 
 func _on_arco_oponente_body_entered(body):
-	if body is Ball:
+	if body is pelota:
 		_restart_game()
 
 
@@ -22,11 +22,9 @@ func _on_restart_timer_timeout():
 	pass # Replace with function body.
 
 
-
 func _on_normal_pressed():
 	get_tree().change_scene_to_file("res://scene/level.tscn")
 	pass # Replace with function body.
-
 
 
 func _on_hard_pressed():
