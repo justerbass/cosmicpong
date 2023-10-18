@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://bt3cufhdaol4t"]
+
+[ext_resource type="Script" path="res://script/ball.gd" id="1_eprm4"]
+[ext_resource type="Texture2D" uid="uid://cxelfa7v7woyp" path="res://sprite/Absolute_Reality_v16_cosmic_ball_2d_0 (1).png" id="2_u4thp"]
+[ext_resource type="AudioStream" uid="uid://cnebfyqermdaf" path="res://sound/sound_jump-90516.mp3" id="3_r3jdm"]
+[ext_resource type="AudioStream" uid="uid://b6ip7x03gyn4j" path="res://sound/pogo-96274.mp3" id="4_qmh1e"]
+[ext_resource type="AudioStream" uid="uid://dalkb3perag12" path="res://sound/jump_c_02-102843.mp3" id="5_ciieo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_iqfl6"]
+radius = 187.0
+
+[node name="ball" type="CharacterBody2D"]
+script = ExtResource("1_eprm4")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_u4thp")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 3)
+shape = SubResource("CircleShape2D_iqfl6")
+
+[node name="AudioCollision" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_r3jdm")
+
+[node name="AudioOponente" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_qmh1e")
+
+[node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ciieo")

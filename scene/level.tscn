@@ -1,0 +1,148 @@
+[gd_scene load_steps=15 format=3 uid="uid://bfe3hobaut2m7"]
+
+[ext_resource type="Script" path="res://script/Level.gd" id="1_nxp8l"]
+[ext_resource type="Texture2D" uid="uid://548qbfbtieiw" path="res://sprite/DreamShaper_v7_galaxy_0.jpg" id="2_n18wq"]
+[ext_resource type="PackedScene" uid="uid://cbcxqiu32bom" path="res://scene/player.tscn" id="3_dxfhe"]
+[ext_resource type="PackedScene" uid="uid://utpos52de6lw" path="res://scene/oponente.tscn" id="4_6ong6"]
+[ext_resource type="PackedScene" uid="uid://bt3cufhdaol4t" path="res://scene/ball.tscn" id="5_ee1js"]
+[ext_resource type="FontFile" uid="uid://wvsdc6ooilmw" path="res://CroissantOne-Regular.ttf" id="6_tueqh"]
+[ext_resource type="AudioStream" uid="uid://chw6sx8gfdgok" path="res://sound/goal-sfx-95846.mp3" id="7_7eie0"]
+[ext_resource type="Texture2D" uid="uid://ctj45kbbiyd40" path="res://sprite/Screenshot_2 (1).png" id="8_gts6p"]
+[ext_resource type="Texture2D" uid="uid://gy7gy6f2s8qt" path="res://sprite/CloseGame.png" id="9_cpfdq"]
+[ext_resource type="Texture2D" uid="uid://bfj788e7r0nlh" path="res://sprite/DreamShaper_v7_cosmic_arrow_0.png" id="10_sek40"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arr5h"]
+size = Vector2(1920, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dcine"]
+size = Vector2(100, 1080)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3eiqr"]
+radius = 95.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8cypj"]
+radius = 95.0
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_nxp8l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(962, 544.9)
+scale = Vector2(3, 1.3)
+texture = ExtResource("2_n18wq")
+
+[node name="ParedSuperior" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedSuperior"]
+position = Vector2(960, -45)
+shape = SubResource("RectangleShape2D_arr5h")
+
+[node name="ParedInferior" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedInferior"]
+position = Vector2(960, 1130)
+shape = SubResource("RectangleShape2D_arr5h")
+
+[node name="ArcoPlayer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcoPlayer"]
+position = Vector2(-50, 540)
+shape = SubResource("RectangleShape2D_dcine")
+
+[node name="ArcoOponente" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcoOponente"]
+position = Vector2(1970, 540)
+shape = SubResource("RectangleShape2D_dcine")
+
+[node name="Player" parent="." groups=["Player"] instance=ExtResource("3_dxfhe")]
+position = Vector2(150, 540)
+
+[node name="Player" type="Area2D" parent="Player" groups=["Player"]]
+
+[node name="Player" type="CollisionShape2D" parent="Player/Player" groups=["Player"]]
+position = Vector2(2, -2)
+shape = SubResource("CircleShape2D_3eiqr")
+
+[node name="Oponente" parent="." groups=["Oponente"] instance=ExtResource("4_6ong6")]
+position = Vector2(1770, 540)
+
+[node name="Oponente" type="Area2D" parent="Oponente" groups=["Oponente"]]
+
+[node name="Oponente" type="CollisionShape2D" parent="Oponente/Oponente" groups=["Oponente"]]
+position = Vector2(0, 8)
+shape = SubResource("CircleShape2D_8cypj")
+
+[node name="ball" parent="." instance=ExtResource("5_ee1js")]
+position = Vector2(960, 540)
+scale = Vector2(0.15, 0.15)
+
+[node name="MarcadorPlayer" type="Label" parent="."]
+offset_left = -200.0
+offset_top = -450.0
+offset_right = 1720.0
+offset_bottom = 630.0
+theme_override_colors/font_color = Color(0.976471, 0.513726, 0.572549, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_tueqh")
+theme_override_font_sizes/font_size = 64
+text = "Marcador Player"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="MarcadorOponente" type="Label" parent="."]
+offset_left = 200.0
+offset_top = -450.0
+offset_right = 2120.0
+offset_bottom = 630.0
+theme_override_colors/font_color = Color(0.976471, 0.513726, 0.572549, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("6_tueqh")
+theme_override_font_sizes/font_size = 64
+text = "Marcador Oponente"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="AudioGoal" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_7eie0")
+
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="botones" type="CanvasLayer" parent="."]
+
+[node name="arriba" type="TouchScreenButton" parent="botones"]
+position = Vector2(1800, 700)
+rotation = 2.35619
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("8_gts6p")
+action = "ui_up"
+
+[node name="abajo" type="TouchScreenButton" parent="botones"]
+position = Vector2(1600, 900)
+rotation = -0.785398
+scale = Vector2(0.5, 0.5)
+texture_normal = ExtResource("8_gts6p")
+action = "ui_down"
+
+[node name="salir" type="TouchScreenButton" parent="botones"]
+position = Vector2(1750, 50)
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("9_cpfdq")
+action = "salir"
+
+[node name="volver" type="TouchScreenButton" parent="botones"]
+position = Vector2(200, 100)
+rotation = 2.35619
+scale = Vector2(0.2, 0.2)
+texture_normal = ExtResource("10_sek40")
+action = "voler"
+
+[connection signal="body_entered" from="ArcoPlayer" to="." method="_on_arco_player_body_entered"]
+[connection signal="body_entered" from="ArcoOponente" to="." method="_on_arco_oponente_body_entered"]
+[connection signal="body_entered" from="Player/Player" to="ball" method="_on_area_2d_body_entered"]
+[connection signal="body_entered" from="Oponente/Oponente" to="ball" method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="RestartTimer" to="ball" method="_on_restart_timer_timeout"]
+[connection signal="pressed" from="botones/volver" to="." method="_on_volver_pressed"]

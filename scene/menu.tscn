@@ -1,0 +1,131 @@
+[gd_scene load_steps=18 format=3 uid="uid://3g5k14ivilpi"]
+
+[ext_resource type="Texture2D" uid="uid://548qbfbtieiw" path="res://sprite/DreamShaper_v7_galaxy_0.jpg" id="1_i1svo"]
+[ext_resource type="Script" path="res://script/menu.gd" id="1_x66wr"]
+[ext_resource type="Texture2D" uid="uid://gy7gy6f2s8qt" path="res://sprite/CloseGame.png" id="4_03xwe"]
+[ext_resource type="Texture2D" uid="uid://gh06iy3c4i5n" path="res://sprite/normalCP.png" id="4_5t5d3"]
+[ext_resource type="Texture2D" uid="uid://be3iiy6fmoeg1" path="res://sprite/hardCP.png" id="5_8alqu"]
+[ext_resource type="Script" path="res://script/auto.gd" id="5_anc4h"]
+[ext_resource type="Texture2D" uid="uid://lhsskvnh0n4u" path="res://sprite/Absolute_Reality_v16_space_ball_orange_0.png" id="5_jrikb"]
+[ext_resource type="Texture2D" uid="uid://bwh3x8xxlh6r5" path="res://sprite/Absolute_Reality_v16_space_ball_green_0.png" id="7_jai2o"]
+[ext_resource type="Script" path="res://script/auto_op.gd" id="8_b4evr"]
+[ext_resource type="Texture2D" uid="uid://yn7cwhxgpkw4" path="res://sprite/tituloCP.png" id="9_ttb0m"]
+[ext_resource type="Script" path="res://script/pelota.gd" id="12_p4heb"]
+[ext_resource type="Texture2D" uid="uid://cxelfa7v7woyp" path="res://sprite/Absolute_Reality_v16_cosmic_ball_2d_0 (1).png" id="13_p4jld"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u62cy"]
+size = Vector2(1920, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aetms"]
+size = Vector2(100, 1080)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7tw20"]
+radius = 82.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4mr1i"]
+radius = 82.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nqoyi"]
+radius = 187.0
+
+[node name="menu" type="Node2D"]
+script = ExtResource("1_x66wr")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(962, 544.9)
+scale = Vector2(3, 1.3)
+texture = ExtResource("1_i1svo")
+
+[node name="botones" type="CanvasLayer" parent="."]
+
+[node name="salir" type="TouchScreenButton" parent="botones"]
+position = Vector2(1750, 50)
+scale = Vector2(0.1, 0.1)
+texture_normal = ExtResource("4_03xwe")
+action = "salir"
+
+[node name="normal" type="TouchScreenButton" parent="botones"]
+position = Vector2(730, 400)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("4_5t5d3")
+action = "normal"
+
+[node name="hard" type="TouchScreenButton" parent="botones"]
+position = Vector2(770, 580)
+scale = Vector2(2, 2)
+texture_normal = ExtResource("5_8alqu")
+action = "hard"
+
+[node name="RestartTimer" type="Timer" parent="."]
+wait_time = 2.0
+
+[node name="ParedSuperior" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedSuperior"]
+position = Vector2(960, -45)
+shape = SubResource("RectangleShape2D_u62cy")
+
+[node name="ParedInferior" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParedInferior"]
+position = Vector2(960, 1130)
+shape = SubResource("RectangleShape2D_u62cy")
+
+[node name="ArcoPlayer" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcoPlayer"]
+position = Vector2(-50, 540)
+shape = SubResource("RectangleShape2D_aetms")
+
+[node name="ArcoOponente" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ArcoOponente"]
+position = Vector2(1970, 540)
+shape = SubResource("RectangleShape2D_aetms")
+
+[node name="Player_Menu" type="CharacterBody2D" parent="."]
+position = Vector2(150, 540)
+script = ExtResource("5_anc4h")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player_Menu"]
+scale = Vector2(0.37, 0.37)
+texture = ExtResource("5_jrikb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player_Menu"]
+position = Vector2(3, -1)
+shape = SubResource("CircleShape2D_7tw20")
+
+[node name="Oponente_Menu" type="CharacterBody2D" parent="."]
+position = Vector2(1770, 540)
+script = ExtResource("8_b4evr")
+
+[node name="Sprite2D" type="Sprite2D" parent="Oponente_Menu"]
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("7_jai2o")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Oponente_Menu"]
+position = Vector2(1, 7)
+shape = SubResource("CircleShape2D_4mr1i")
+
+[node name="Titulo" type="Sprite2D" parent="."]
+position = Vector2(900, 150)
+scale = Vector2(2, 2)
+texture = ExtResource("9_ttb0m")
+
+[node name="pelota" type="CharacterBody2D" parent="."]
+position = Vector2(960, 540)
+scale = Vector2(0.15, 0.15)
+script = ExtResource("12_p4heb")
+
+[node name="Sprite2D" type="Sprite2D" parent="pelota"]
+texture = ExtResource("13_p4jld")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pelota"]
+position = Vector2(3, 3)
+shape = SubResource("CircleShape2D_nqoyi")
+
+[connection signal="pressed" from="botones/normal" to="." method="_on_normal_pressed"]
+[connection signal="pressed" from="botones/hard" to="." method="_on_hard_pressed"]
+[connection signal="timeout" from="RestartTimer" to="pelota" method="_on_restart_timer_timeout"]
+[connection signal="body_entered" from="ArcoPlayer" to="." method="_on_arco_player_body_entered"]
+[connection signal="body_entered" from="ArcoOponente" to="." method="_on_arco_oponente_body_entered"]

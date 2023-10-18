@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://utpos52de6lw"]
+
+[ext_resource type="Script" path="res://script/Oponente.gd" id="1_5nyjo"]
+[ext_resource type="Texture2D" uid="uid://bwh3x8xxlh6r5" path="res://sprite/Absolute_Reality_v16_space_ball_green_0.png" id="2_3cfid"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lfl4i"]
+radius = 82.0
+
+[node name="Oponente" type="CharacterBody2D"]
+script = ExtResource("1_5nyjo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.43, 0.43)
+texture = ExtResource("2_3cfid")
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="."]
+position = Vector2(1, 7)
+shape = SubResource("CircleShape2D_lfl4i")
